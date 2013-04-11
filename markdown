@@ -1,4 +1,3 @@
-
 Dunbar Coummunity Map Data
 ----------------------------------------------------------------------------------------------
 ```{r echo=FALSE, results='hide', echo=FALSE, message=FALSE, comment=FALSE}
@@ -9,7 +8,7 @@ library(knitr) # create html webpage from this code
  library(sp)} # library for spatial analysis - can plot 'graphs'/maps of sp objects
 ```
 ```{r, echo=FALSE} 
-src <- osmsource_api() # sets default openstreetmap api - url from data is downloaded
+src <- osmsource_api() # sets default openstreetmap api - url from where the data is downloaded - please be nice and don't go crazy with downloading - terms of use apply
 bb2 <- center_bbox(-2.515714, 56.0028, 1000, 1000) # the center point co-ordinates of the bounding box for data download, 1000 by 1000 metres bounding box
 ua3 <- get_osm(bb2, source = src) # get data and from osm api and called it 'ua3'
 
