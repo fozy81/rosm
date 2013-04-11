@@ -57,7 +57,7 @@ dn <- nattrs[order(nattrs$timestamp),] # tried to reorder the attrs by timestamp
 
 **Landuse Area**
 
-<p>Buildings: `r gArea(bgUTM) / 10000` hectares or approx `r round((gArea(bgUTM) / 1000)*0.62, digits=0)` football pitches<p> # rgeos library required
+<p>Buildings: `r gArea(bgUTM) / 10000` hectares or approx `r round((gArea(bgUTM) / 1000)*0.62, digits=0)` football pitches<p>
 <p>Playgrounds: `r gArea(pgUTM) / 10000` hectares or approx `r round((gArea(pgUTM) / 1000)*0.62, digits=0)` football pitches</p>
 <p>Parks: `r gArea(pkUTM) / 10000` hectares or approx `r round((gArea(pkUTM) / 1000)*0.62, digits=0)` football pitches</p>
 <p>Car parks: `r gArea(pkgUTM) / 10000` hectares or approx `r round((gArea(pkgUTM) / 1000)*0.62, digits=0)` football pitches</p>
