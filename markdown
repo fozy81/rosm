@@ -12,8 +12,8 @@ src <- osmsource_api() # sets default openstreetmap api - url from where the dat
 bb2 <- center_bbox(-2.515714, 56.0028, 1000, 1000) # the center point co-ordinates of the bounding box for data download, 1000 by 1000 metres bounding box
 ua3 <- get_osm(bb2, source = src) # get data and from osm api and called it 'ua3'
 
-hw_ids2 <- find(ua3, way(tags(k == "lit"))) #find ways tagged for 'lit'
-hw_ids2 <- find_down(ua3, way(hw_ids2)) #find nodes in the ways tagged 'lit'
+hw_ids2 <- find(ua3, way(tags(k == "lit"))) #find ways tagged for 'lit'- using OSMAR library function'find'
+hw_ids2 <- find_down(ua3, way(hw_ids2)) #find nodes in the ways tagged 'lit' - again more OSMAR library magic
 hw2 <- subset(ua3, ids = hw_ids2) # extract nodes associated with lit tagged ways from ua3 and call it hw2
 
 bg_ids2 <- find(ua3, way(tags(k == "building"))) # find ways tagged 'building' in ua3
@@ -32,13 +32,13 @@ pkg_ids2 <- find(ua3, way(tags(v == "parking")))
 pkg_ids2 <- find_down(ua3, way(pkg_ids2))
 pkg <- subset(ua3, ids = pkg_ids2)
 
-bg_poly2 <- as_sp(bg2, "polygons") #create sp class objects for ploygons for buildings
+bg_poly2 <- as_sp(bg2, "polygons") #create sp class objects for ploygons for buildings - sp library required
 hw_poly2 <- as_sp(hw2, "lines") #create sp class objects for lit= highways
 pg_poly2 <- as_sp(pg2, "polygon") #create sp class objects for polygons for playgrounds
 pk_poly2 <- as_sp(pk, "polygon")
 pkg_poly2 <- as_sp(pkg, "polygon")
 
-bgUTM <-spTransform(bg_poly2,CRS("+proj=utm")) #transforms building polygon into universal transverse mercator - so we can calculate area
+bgUTM <-spTransform(bg_poly2,CRS("+proj=utm")) #transforms building polygon into universal transverse mercator - so we can calculate area - rgdal library required
 pgUTM <-spTransform(pg_poly2,CRS("+proj=utm"))  #transforms playground polygon into universal transverse mercator - so we can calculate area
 pkUTM <- spTransform(pk_poly2,CRS("+proj=utm"))
 pkgUTM <- spTransform(pkg_poly2,CRS("+proj=utm"))
@@ -57,7 +57,7 @@ dn <- nattrs[order(nattrs$timestamp),] # tried to reorder the attrs by timestamp
 
 **Landuse Area**
 
-<p>Buildings: `r gArea(bgUTM) / 10000` hectares or approx `r round((gArea(bgUTM) / 1000)*0.62, digits=0)` football pitches<p>
+<p>Buildings: `r gArea(bgUTM) / 10000` hectares or approx `r round((gArea(bgUTM) / 1000)*0.62, digits=0)` football pitches<p> # rgeos library required
 <p>Playgrounds: `r gArea(pgUTM) / 10000` hectares or approx `r round((gArea(pgUTM) / 1000)*0.62, digits=0)` football pitches</p>
 <p>Parks: `r gArea(pkUTM) / 10000` hectares or approx `r round((gArea(pkUTM) / 1000)*0.62, digits=0)` football pitches</p>
 <p>Car parks: `r gArea(pkgUTM) / 10000` hectares or approx `r round((gArea(pkgUTM) / 1000)*0.62, digits=0)` football pitches</p>
